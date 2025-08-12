@@ -8,9 +8,11 @@ import FeatureBenifits from "../components/personal-loan/FeatureBenifits";
 import DividerWithMobileApp from "../components/dividers/DivierwithMobileApp";
 import Documentation from "../components/personal-loan/Documentation";
 import LoanSteps from "../components/personal-loan/LoanStepsPurpos";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalLoan() {
     const avatarSrc = ""; // put avatar image url here, else initials will show
+    const navigator = useNavigate();
 
     return (
         <>
@@ -36,7 +38,7 @@ export default function PersonalLoan() {
                             wherever!
                         </p>
                         <div className="w-3/2">
-                            <GradientButton displayText="Apply Now" direction="right" />
+                            <GradientButton displayText="Apply Now" direction="right" onClick={()=>{navigator('../general-registartion')}}/>
                         </div>
                     </div>
 

@@ -2,10 +2,12 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import GradientButton from "./GradientButton";
 import BorrowinLogo from "./Logo";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigator = useNavigate();
 
     return <>
 
@@ -68,7 +70,7 @@ export default function NavBar() {
                             </nav>
 
                             <div className="hidden md:flex items-center space-x-4">
-                                <GradientButton direction="right" displayText="Sign up" />
+                                <GradientButton direction="right" displayText="Sign up" onClick={() => navigator('signup')}/>
                             </div>
                         </div>
 

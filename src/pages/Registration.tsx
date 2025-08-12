@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { User, Users, Banknote, TrendingUp, Calendar } from 'lucide-react';
+import { User } from 'lucide-react';
 import BorrowinWhiteLogo from '../components/LogoWhite';
 import Card from '../components/Card';
 import SecureIcon from '../assets/icons/SecureIconReg.svg'
 import OnlineIcon from '../assets/icons/OnlineIconReg.svg'
 import ChatIcon from '../assets/icons/ChatIconReg.svg'
+import SalariedIcon from '../assets/icons/SalariedIcon.svg'
+import ApplicantAgeIcon from '../assets/icons/ApplicantAgeIcon.svg'
+import MonthllyCashIcon from '../assets/icons/MonthllyCashIcon.svg'
+import MinimumCibilIcon from '../assets/icons/MinimumCibilIcon.svg'
+import NoRecentDefaultIcon from '../assets/icons/NoRecentDefaultIcon.svg'
+import GradientButton from '../components/GradientButton';
+import Checkbox from '../components/formElements/CheckBox';
 
 export default function BorrowinRegistration() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -45,31 +52,31 @@ export default function BorrowinRegistration() {
 
     const eligibilityCriteria = [
         {
-            icon: <Users className="w-5 h-5" />,
+            icon: SalariedIcon,
             text: "Only Salaried individuals are eligible",
             bgColor: "bg-teal-100",
             position: "right"
         },
         {
-            icon: <Calendar className="w-5 h-5" />,
+            icon: ApplicantAgeIcon,
             text: "Applicants aged between 23-60 years",
             bgColor: "bg-orange-100",
             position: "left"
         },
         {
-            icon: <Banknote className="w-5 h-5" />,
+            icon: MonthllyCashIcon,
             text: "Minimum monthly salary of INR. 30K",
             bgColor: "bg-yellow-100",
             position: "right"
         },
         {
-            icon: <TrendingUp className="w-5 h-5" />,
+            icon: MinimumCibilIcon,
             text: "Minimum CIBIL score of 680+",
             bgColor: "bg-blue-100",
             position: "left"
         },
         {
-            icon: <Calendar className="w-5 h-5" />,
+            icon: NoRecentDefaultIcon,
             text: "No recent defaults in the past 12 months",
             bgColor: "bg-green-100",
             position: "right"
@@ -115,7 +122,7 @@ export default function BorrowinRegistration() {
                             </p>
                         </div>
 
-                        <div className="space-y-6 mx-8">
+                        <div className="space-y-6 mx-4">
                             {currentStep === 1 ? (
                                 features.map((feature, index) => (
                                     <div key={index} className={`flex ${feature.position === 'right' ? 'justify-end' : 'justify-start'}`}>
@@ -167,11 +174,34 @@ export default function BorrowinRegistration() {
                             ) : (
                                 eligibilityCriteria.map((criteria, index) => (
                                     <div key={index} className={`flex ${criteria.position === 'right' ? 'justify-end' : 'justify-start'}`}>
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-inner">
-                                                {criteria.icon}
-                                            </div>
-                                            <p className="text-white text-sm font-medium flex-1">{criteria.text}</p>
+                                        <div className="flex items-center space-x-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/60 rounded-2xl py-1 px-2 shadow-[0_0_30px_rgba(255,255,255,0.2)] ">
+                                            {
+                                                criteria.position === "right" ? (
+                                                    <>
+                                                        <p className="text-white text-sm font-semibold flex-1 me-6">{criteria.text}</p>
+                                                        <div className="flex items-center justify-center">
+                                                            <img
+                                                                src={criteria.icon}
+                                                                width={40}
+                                                                height={40}
+                                                                alt=""
+                                                                className="drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+                                                            />
+                                                        </div>
+                                                    </>
+                                                ) : (<>
+                                                    <div className="flex items-center justify-center me-4">
+                                                        <img
+                                                            src={criteria.icon}
+                                                            width={40}
+                                                            height={40}
+                                                            alt=""
+                                                            className="drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+                                                        />
+                                                    </div>
+                                                    <p className="text-white text-sm font-semibold flex-1">{criteria.text}</p>
+                                                </>)
+                                            }
                                         </div>
                                     </div>
                                 ))
@@ -182,26 +212,42 @@ export default function BorrowinRegistration() {
                     {/* Right Side - Registration Form */}
                     <div className="bg-gray-50 lg:col-span-3 p-8 flex flex-col justify-center relative">
                         {/* Step Indicator */}
-                        <div className="absolute top-5 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-50">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${currentStep === 1 ? 'bg-teal-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-                                1
+                        <div className="absolute top-10 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-50">
+                            <div className={`relative flex items-center justify-center`}>
+                                {currentStep === 1 && (
+                                    <div className="absolute w-7 h-7 rounded-full bg-teal-500/20"></div>
+                                )}
+                                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-semibold bg-teal-500 z-10 text-white`}>
+                                    1
+                                </div>
                             </div>
-                            <div className="w-8 h-0.5 bg-gray-300"></div>
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${currentStep === 2 ? 'bg-teal-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-                                2
+                            <div className="w-8 border-t-2 border-gray-800 border-dashed"></div>
+                            <div className={`relative flex items-center justify-center`}>
+                                {currentStep === 2 && (
+                                    <div className="absolute w-7 h-7 rounded-full bg-teal-500/20"></div>
+                                )}
+                                <div
+                                    className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-semibold z-10 ${currentStep === 2
+                                        ? 'bg-teal-500 text-white'
+                                        : 'border border-gray-800 text-gray-600 bg-white'
+                                        }`}
+                                >
+                                    2
+                                </div>
                             </div>
                         </div>
 
-
-                        <div className="max-w-md w-full mx-auto">
+                        <div className="w-full mx-auto">
                             {/* User Avatar & Title */}
-                            <div className="text-center mb-8">
-                                <div className="bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <div className="flex mb-12 mt-18">
+                                <div className="bg-blue-500 rounded-full w-14 h-14 flex items-center justify-center">
                                     <User className="w-8 h-8 text-white" />
                                 </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-gray-800">User Name</h3>
-                                    <p className="text-gray-500 text-sm">useremail12@gmail.com</p>
+                                <div className='flex justify-center items-center ms-4'>
+                                    <div>
+                                        <h3 className="text-sm font-semibold text-gray">User name</h3>
+                                        <p className="text-gray-500 text-xs">useremail12@gmail.com</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -218,7 +264,7 @@ export default function BorrowinRegistration() {
                                             value={formData.fullName}
                                             onChange={handleInputChange}
                                             placeholder="Name as per aadhar"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                                         />
                                     </div>
 
@@ -234,7 +280,7 @@ export default function BorrowinRegistration() {
                                                 value={formData.email}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter here"
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                                             />
                                         </div>
                                         <div>
@@ -246,7 +292,7 @@ export default function BorrowinRegistration() {
                                                 name="dateOfBirth"
                                                 value={formData.dateOfBirth}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                className="w-full px-3 py-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                                             />
                                         </div>
                                     </div>
@@ -263,7 +309,7 @@ export default function BorrowinRegistration() {
                                                 value={formData.age}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter age"
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                                             />
                                         </div>
                                         <div>
@@ -274,7 +320,7 @@ export default function BorrowinRegistration() {
                                                 name="gender"
                                                 value={formData.gender}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
                                             >
                                                 <option value="">Select</option>
                                                 <option value="male">Male</option>
@@ -285,12 +331,9 @@ export default function BorrowinRegistration() {
                                     </div>
 
                                     {/* Submit Button */}
-                                    <button
-                                        onClick={handleSubmit}
-                                        className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 mt-8"
-                                    >
-                                        Save & Next
-                                    </button>
+                                    <div className="text-center mt-12">
+                                        <GradientButton direction='right' displayText='Save & Next' extraCss='font-semibold' onClick={handleSubmit} />
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="space-y-6">
@@ -380,12 +423,9 @@ export default function BorrowinRegistration() {
 
                                     {/* Checkbox */}
                                     <div className="flex items-center space-x-3 mt-6">
-                                        <input
-                                            type="checkbox"
-                                            name="detailsAccurate"
+                                        <Checkbox 
                                             checked={formData.detailsAccurate}
                                             onChange={(e) => setFormData(prev => ({ ...prev, detailsAccurate: e.target.checked }))}
-                                            className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500"
                                         />
                                         <label className="text-sm text-gray-700">
                                             I confirm that all details are accurate.
@@ -393,19 +433,14 @@ export default function BorrowinRegistration() {
                                     </div>
 
                                     {/* Action Buttons */}
-                                    <div className="flex space-x-4 mt-8">
+                                    <div className="flex space-x-4 justify-center mt-8">
                                         <button
                                             onClick={handlePrevious}
-                                            className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-200"
+                                            className="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-3 px-12 rounded-lg transition duration-200"
                                         >
                                             Previous Page
                                         </button>
-                                        <button
-                                            onClick={handleSubmit}
-                                            className="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200"
-                                        >
-                                            Confirm Details
-                                        </button>
+                                        <GradientButton direction='right' displayText='Confirm Details' extraCss='font-semibold' onClick={handleSubmit} />
                                     </div>
                                 </div>
                             )}
