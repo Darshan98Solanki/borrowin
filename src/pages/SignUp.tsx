@@ -37,8 +37,6 @@ export default function SignUp() {
 
     const selectedCountry = countries.find(c => c.code === countryCode) ?? countries[0];
 
-    console.log("show otp", showOTP);
-
     return (
         <div className="min-h-screen flex items-center justify-center p-4 [background:linear-gradient(90deg,#26837A_0%,#50BAAB_100%)]">
             <div className="w-full mx-36 bg-white overflow-hidden shadow-2xl">

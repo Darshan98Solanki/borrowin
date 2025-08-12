@@ -3,6 +3,7 @@ import './App.css'
 import BorrowInLandingPage from './pages/Home'
 import SignUp from './pages/SignUp'
 import PersonalLoan from './pages/PersonalLoan'
+import BorrowinRegistration from './pages/Registration'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<BorrowInLandingPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/personal-loan" element={<PersonalLoan />} />
+          <Route path="/general-registartion" element={<BorrowinRegistration />} />
         </Routes>
       </BrowserRouter>
   )
