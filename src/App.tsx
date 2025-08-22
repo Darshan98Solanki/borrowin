@@ -4,6 +4,7 @@ import BorrowInLandingPage from './pages/Home'
 import SignUp from './pages/SignUp'
 import PersonalLoan from './pages/PersonalLoan'
 import BorrowinRegistration from './pages/Registration'
+import Verification from './pages/Verification'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/personal-loan" element={<PersonalLoan />} />
           <Route path="/general-registartion" element={<BorrowinRegistration />} />
+          <Route path="/verification" element={<Verification />} />
         </Routes>
       </BrowserRouter>
   )
