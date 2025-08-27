@@ -37,11 +37,17 @@ export default function BorrowInLandingPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12 py-16 lg:py-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5 col-span-12 lg:ms-16 space-y-6 ">
-              <h1 className="text-2xl sm:text-2xl lg:text-4xl font-semibold text-gray-900 leading-tight font-[Poppins]">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight font-[Poppins]">
                 Borrow Smart, Borrow Fast, Borrowin
               </h1>
-              <p className="text-base sm:text-lg text-gray-700 font-normal leading-[1.9] tracking-wide">
-                Welcome to Borrowin – a digital lending platform built by a trusted NBFC to make borrowing easy, fast, and secure. Whether you need funds for a personal need or a short-term emergency, Borrowin offers instant loan approvals, quick disbursals, and a 100% online process with minimal documentation.
+              <p className="text-base sm:text-md text-gray-700 font-normal leading-[1.9] tracking-wide">
+                Welcome to <span className="font-semibold">Borrowin</span> – a digital lending platform built by a trusted NBFC to make borrowing easy, fast, and secure. Whether you need funds for a personal need or a short-term emergency, Borrowin offers instant loan approvals, quick disbursals, and a 100% online process with minimal documentation.
+              </p>
+              <p className="text-base sm:text-md text-gray-700 font-normal leading-[1.9] tracking-wide">
+                We combine smart technology with years of financial expertise to give you a hassle-free experience — no hidden charges, no prepayment penalties, and total transparency at every step.
+              </p>
+              <p className="text-base sm:text-md text-gray-700 font-semibold leading-[1.9] tracking-wide">
+                Backed by trust. Powered by speed. Designed for you.
               </p>
               <GradientButton direction="right" displayText="Apply Now" />
             </div>

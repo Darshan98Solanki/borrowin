@@ -42,13 +42,13 @@ export default function FAQSection() {
                 {faqs.map((faq, index) => (
                     <div
                         key={index}
-                        className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-sm"
+                        className="border border-black rounded-xl overflow-hidden transition-all duration-200 hover:shadow-sm bg-white p-2"
                     >
                         <button
                             onClick={() => toggleFAQ(index)}
-                            className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 transition-colors duration-200"
+                            className="bg-[#50BAAB1A] rounded-lg w-full px-4 py-3 text-left flex items-center justify-between hover:bg-[#50BAAB3A] transition-colors duration-200"
                         >
-                            <span className="text-gray-900 font-medium text-lg pr-4">
+                            <span className="text-gray-900 text-md font-semibold pr-4">
                                 {faq.question}
                             </span>
                             <div className="flex-shrink-0">
@@ -63,7 +63,7 @@ export default function FAQSection() {
                         </button>
                         {openIndex === index && (
                             <div className="px-6 pb-5">
-                                <div className="pt-2 border-t border-gray-200">
+                                <div className="pt-2 border-t text-sm border-gray-200">
                                     <p className="text-gray-600 leading-relaxed mt-3">
                                         {faq.answer}
                                     </p>
@@ -76,7 +76,7 @@ export default function FAQSection() {
 
             {/* View More Link */}
             <div className="mt-8">
-                <button className="text-teal-600 hover:text-teal-700 font-medium flex items-center transition-colors duration-200">
+                <button className="text-teal-600 hover:text-teal-700 font-semibold flex items-center transition-colors duration-200">
                     <Plus className="w-4 h-4 mr-1" />
                     View More FAQs
                 </button>

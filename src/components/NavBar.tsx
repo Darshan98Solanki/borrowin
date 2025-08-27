@@ -19,49 +19,57 @@ export default function NavBar() {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-16">
-                            <nav className="hidden md:flex space-x-16">
-                                <div className="relative group inline-block">
-                                    <a href="#" className="text-gray-700 hover:text-teal-600">
+                            <nav className="hidden md:flex space-x-16 font-semibold">
+                                <div className="relative inline-block">
+                                    <button
+                                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                        className="flex items-center gap-1 font-semibold hover:text-teal-600"
+                                    >
                                         Loans
-                                        {/* <ChevronDown /> */}
-                                    </a>
+                                        <ChevronDown
+                                            className={`w-4 h-4 transition-transform duration-200 ${isMenuOpen ? "rotate-180" : "rotate-0"
+                                                }`}
+                                        />
+                                    </button>
 
-                                    <div className="absolute hidden group-hover:block bg-white border rounded shadow-md mt-2 min-w-[150px] z-10">
-                                        <ul className="text-left">
-                                            <li>
-                                                <a
-                                                    href="#"
-                                                    className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-600"
-                                                >
-                                                    Personal Loan
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="#"
-                                                    className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-600"
-                                                >
-                                                    Business Loan
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="#"
-                                                    className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-600"
-                                                >
-                                                    Education Loan
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="#"
-                                                    className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-600"
-                                                >
-                                                    Home Loan
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    {isMenuOpen && (
+                                        <div className="absolute bg-white border rounded shadow-md mt-2 min-w-[150px] z-10">
+                                            <ul className="text-left">
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 hover:bg-teal-100 hover:text-teal-600"
+                                                    >
+                                                        Personal Loan
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 hover:bg-teal-100 hover:text-teal-600"
+                                                    >
+                                                        Business Loan
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 hover:bg-teal-100 hover:text-teal-600"
+                                                    >
+                                                        Education Loan
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 hover:bg-teal-100 hover:text-teal-600"
+                                                    >
+                                                        Home Loan
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <a href="#" className="text-gray-700 hover:text-teal-600">Credit report</a>
@@ -70,7 +78,7 @@ export default function NavBar() {
                             </nav>
 
                             <div className="hidden md:flex items-center space-x-4">
-                                <GradientButton direction="right" displayText="Sign up" onClick={() => navigator('signup')}/>
+                                <GradientButton direction="right" displayText="Sign up" onClick={() => navigator('signup')} />
                             </div>
                         </div>
 

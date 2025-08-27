@@ -13,9 +13,56 @@ import NoRecentDefaultIcon from '../assets/icons/NoRecentDefaultIcon.svg'
 import GradientButton from '../components/GradientButton';
 import Checkbox from '../components/formElements/CheckBox';
 
+// Interface for form data
+interface FormData {
+    fullName: string;
+    email: string;
+    dateOfBirth: string;
+    age: string;
+    gender: string;
+    address: string;
+    country: string;
+    state: string;
+    city: string;
+    pincode: string;
+    detailsAccurate: boolean;
+}
+
+// Interface for form errors
+interface FormErrors {
+    fullName?: string;
+    email?: string;
+    dateOfBirth?: string;
+    age?: string;
+    gender?: string;
+    address?: string;
+    country?: string;
+    state?: string;
+    city?: string;
+    pincode?: string;
+    detailsAccurate?: string;
+}
+
+// Interface for feature items
+interface Feature {
+    icon: string;
+    title: string;
+    subtitle: string;
+    position: 'left' | 'right';
+}
+
+// Interface for eligibility criteria
+interface EligibilityCriteria {
+    icon: string;
+    text: string;
+    bgColor: string;
+    position: 'left' | 'right';
+}
+
 export default function BorrowinRegistration() {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState({
+    const [currentStep, setCurrentStep] = useState<1 | 2>(1);
+    const [errors, setErrors] = useState<FormErrors>({});
+    const [formData, setFormData] = useState<FormData>({
         fullName: '',
         email: '',
         dateOfBirth: '',
@@ -29,7 +76,7 @@ export default function BorrowinRegistration() {
         detailsAccurate: false
     });
 
-    const features = [
+    const features: Feature[] = [
         {
             icon: OnlineIcon,
             title: "Fully Online Process",
@@ -50,7 +97,7 @@ export default function BorrowinRegistration() {
         }
     ];
 
-    const eligibilityCriteria = [
+    const eligibilityCriteria: EligibilityCriteria[] = [
         {
             icon: SalariedIcon,
             text: "Only Salaried individuals are eligible",
@@ -83,23 +130,134 @@ export default function BorrowinRegistration() {
         }
     ];
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const validateStep1 = (): FormErrors => {
+        const newErrors: FormErrors = {};
+
+        if (!formData.fullName.trim()) {
+            newErrors.fullName = 'Full name is required';
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email';
+        }
+
+        if (!formData.dateOfBirth) {
+            newErrors.dateOfBirth = 'Date of birth is required';
+        } else {
+            const dob = new Date(formData.dateOfBirth);
+            const today = new Date();
+            const minAgeDate = new Date(
+                today.getFullYear() - 18,
+                today.getMonth(),
+                today.getDate()
+            );
+
+            if (dob > minAgeDate) {
+                newErrors.dateOfBirth = 'Age must be greater than or equal to 18';
+            }
+        }
+
+
+        if (!formData.age) {
+            newErrors.age = 'Age is required';
+        } else if (Number(formData.age) < 18 || Number(formData.age) > 100) {
+            newErrors.age = 'Age must be between 18 and 100';
+        }
+
+        if (!formData.gender) {
+            newErrors.gender = 'Gender selection is required';
+        }
+
+        return newErrors;
+    };
+
+    const validateStep2 = (): FormErrors => {
+        const newErrors: FormErrors = {};
+
+        if (!formData.address.trim()) {
+            newErrors.address = 'Address is required';
+        }
+
+        if (!formData.country) {
+            newErrors.country = 'Country selection is required';
+        }
+
+        if (!formData.state) {
+            newErrors.state = 'State selection is required';
+        }
+
+        if (!formData.city) {
+            newErrors.city = 'City selection is required';
+        }
+
+        if (!formData.pincode.trim()) {
+            newErrors.pincode = 'Pincode is required';
+        } else if (!/^\d{6}$/.test(formData.pincode)) {
+            newErrors.pincode = 'Pincode must be 6 digits';
+        }
+
+        if (!formData.detailsAccurate) {
+            newErrors.detailsAccurate = 'Please confirm that all details are accurate';
+        }
+
+        return newErrors;
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
+
+        // Clear error for this field when user starts typing
+        if (errors[name as keyof FormErrors]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: undefined
+            }));
+        }
     };
 
-    const handleSubmit = () => {
+    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        const { checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            detailsAccurate: checked
+        }));
+
+        if (errors.detailsAccurate) {
+            setErrors(prev => ({
+                ...prev,
+                detailsAccurate: undefined
+            }));
+        }
+    };
+
+    const handleSubmit = (): void => {
         if (currentStep === 1) {
+            const stepErrors = validateStep1();
+            if (Object.keys(stepErrors).length > 0) {
+                setErrors(stepErrors);
+                return;
+            }
+            setErrors({});
             setCurrentStep(2);
         } else {
+            const stepErrors = validateStep2();
+            if (Object.keys(stepErrors).length > 0) {
+                setErrors(stepErrors);
+                return;
+            }
+            setErrors({});
             console.log("Final Form Data:", formData);
         }
     };
 
-    const handlePrevious = () => {
+    const handlePrevious = (): void => {
+        setErrors({});
         setCurrentStep(1);
     };
 
@@ -253,7 +411,6 @@ export default function BorrowinRegistration() {
 
                             {currentStep === 1 ? (
                                 <div className="space-y-6">
-                                    {/* Full Name */}
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Full Name*
@@ -264,11 +421,14 @@ export default function BorrowinRegistration() {
                                             value={formData.fullName}
                                             onChange={handleInputChange}
                                             placeholder="Name as per aadhar"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                            required
+                                            className={`w-full bg-[#50BAAB0F] border-1 border-[#50BAAB] px-3 py-2 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
                                         />
+                                        {errors.fullName && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>
+                                        )}
                                     </div>
 
-                                    {/* Email and Date of Birth Row */}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -280,8 +440,12 @@ export default function BorrowinRegistration() {
                                                 value={formData.email}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter here"
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                required
+                                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                                             />
+                                            {errors.email && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -292,16 +456,19 @@ export default function BorrowinRegistration() {
                                                 name="dateOfBirth"
                                                 value={formData.dateOfBirth}
                                                 onChange={handleInputChange}
-                                                className="w-full px-3 py-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                required
+                                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'}`}
                                             />
+                                            {errors.dateOfBirth && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth}</p>
+                                            )}
                                         </div>
                                     </div>
 
-                                    {/* Age and Gender Row */}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                Age
+                                                Age*
                                             </label>
                                             <input
                                                 type="number"
@@ -309,8 +476,15 @@ export default function BorrowinRegistration() {
                                                 value={formData.age}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter age"
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                required
+                                                min="18"
+                                                max="100"
+                                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.age ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             />
+                                            {errors.age && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.age}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -320,24 +494,27 @@ export default function BorrowinRegistration() {
                                                 name="gender"
                                                 value={formData.gender}
                                                 onChange={handleInputChange}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                                                required
+                                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white ${errors.gender ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             >
-                                                <option value="">Select</option>
+                                                <option value="">Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                                 <option value="other">Other</option>
                                             </select>
+                                            {errors.gender && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.gender}</p>
+                                            )}
                                         </div>
                                     </div>
 
-                                    {/* Submit Button */}
                                     <div className="text-center mt-12">
-                                        <GradientButton direction='right' displayText='Save & Next' extraCss='font-semibold' onClick={handleSubmit} />
+                                        <GradientButton direction='right' displayText='Save & Next' extraCss='font-semibold py-3' onClick={handleSubmit} />
                                     </div>
                                 </div>
                             ) : (
                                 <div className="space-y-6">
-                                    {/* Address */}
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Address*
@@ -348,11 +525,15 @@ export default function BorrowinRegistration() {
                                             value={formData.address}
                                             onChange={handleInputChange}
                                             placeholder="Enter here"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                            required
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.address ? 'border-red-500' : 'border-gray-300'
+                                                }`}
                                         />
+                                        {errors.address && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+                                        )}
                                     </div>
 
-                                    {/* Country and State Row */}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -362,13 +543,18 @@ export default function BorrowinRegistration() {
                                                 name="country"
                                                 value={formData.country}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                                                required
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white ${errors.country ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             >
-                                                <option value="">Select</option>
+                                                <option value="">Select Country</option>
                                                 <option value="india">India</option>
                                                 <option value="usa">USA</option>
                                                 <option value="uk">UK</option>
                                             </select>
+                                            {errors.country && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.country}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -378,17 +564,21 @@ export default function BorrowinRegistration() {
                                                 name="state"
                                                 value={formData.state}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                                                required
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white ${errors.state ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             >
-                                                <option value="">Select</option>
+                                                <option value="">Select State</option>
                                                 <option value="maharashtra">Maharashtra</option>
                                                 <option value="delhi">Delhi</option>
                                                 <option value="bangalore">Bangalore</option>
                                             </select>
+                                            {errors.state && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.state}</p>
+                                            )}
                                         </div>
                                     </div>
 
-                                    {/* City and Pincode Row */}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -398,13 +588,18 @@ export default function BorrowinRegistration() {
                                                 name="city"
                                                 value={formData.city}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                                                required
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white ${errors.city ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             >
-                                                <option value="">Select</option>
+                                                <option value="">Select City</option>
                                                 <option value="mumbai">Mumbai</option>
                                                 <option value="pune">Pune</option>
                                                 <option value="nashik">Nashik</option>
                                             </select>
+                                            {errors.city && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -416,20 +611,32 @@ export default function BorrowinRegistration() {
                                                 value={formData.pincode}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter here"
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                                                required
+                                                pattern="[0-9]{6}"
+                                                maxLength={6}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${errors.pincode ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
                                             />
+                                            {errors.pincode && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.pincode}</p>
+                                            )}
                                         </div>
                                     </div>
 
-                                    {/* Checkbox */}
-                                    <div className="flex items-center space-x-3 mt-6">
-                                        <Checkbox 
+                                    <div className="flex items-start space-x-3 mt-6">
+                                        <Checkbox
                                             checked={formData.detailsAccurate}
-                                            onChange={(e) => setFormData(prev => ({ ...prev, detailsAccurate: e.target.checked }))}
+                                            onChange={handleCheckboxChange}
+                                        // required
                                         />
-                                        <label className="text-sm text-gray-700">
-                                            I confirm that all details are accurate.
-                                        </label>
+                                        <div>
+                                            <label className="text-sm text-gray-700">
+                                                I confirm that all details are accurate.*
+                                            </label>
+                                            {errors.detailsAccurate && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.detailsAccurate}</p>
+                                            )}
+                                        </div>
                                     </div>
 
                                     {/* Action Buttons */}

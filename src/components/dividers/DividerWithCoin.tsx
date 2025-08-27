@@ -16,7 +16,7 @@ export default function DividerWithCoin() {
                     <p className="text-sm text-gray-700">
                         Evaluate the loan amount you are eligible for and choose an EMI plan that works for you.
                     </p>
-                    <button className="bg-white text-gray-800 px-6 py-2 rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200 font-medium">
+                    <button className="bg-white text-gray-800 px-6 py-2 rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200 font-semibold">
                         Check Eligibility
                     </button>
                 </div>

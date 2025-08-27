@@ -73,7 +73,7 @@ export default function SignUpForm({
                 <div className="flex rounded-lg overflow-hidden border border-gray-300 focus-within:ring-2 focus-within:ring-teal-500 bg-white">
                     {/* Country Code Select */}
                     <div className="relative w-24">
-                        <div className="flex items-center px-3 py-3 bg-white h-full">
+                        <div className="flex items-center px-3 py-3 bg-[#DCF1ED] h-full">
                             <img
                                 src={selectedCountry?.flag}
                                 alt={selectedCountry?.name}
@@ -82,7 +82,7 @@ export default function SignUpForm({
                             <select
                                 value={countryCode}
                                 onChange={(e) => onCountryChange(e.target.value)}
-                                className="bg-white focus:outline-none text-sm font-medium text-gray-800 cursor-pointer w-full"
+                                className="focus:outline-none text-sm font-medium text-gray-800 cursor-pointer w-full"
                                 style={{
                                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                                     backgroundPosition: "right 0.2rem center",
@@ -93,7 +93,7 @@ export default function SignUpForm({
                                 }}
                             >
                                 {countries.map((c) => (
-                                    <option key={c.code} value={c.code} className="py-2 px-3">
+                                    <option key={c.code} value={c.code} className="px-4 py-2 hover:bg-teal-100 hover:text-teal-600 cursor-pointer">
                                         {c.code}
                                     </option>
                                 ))}
@@ -108,6 +108,7 @@ export default function SignUpForm({
                     <input
                         type="tel"
                         value={mobileNumber}
+                        maxLength={10}
                         onChange={(e) => onMobileNumberChange(e.target.value)}
                         placeholder="Enter number"
                         className="flex-1 px-4 py-3 focus:outline-none bg-white text-gray-800 min-w-0"

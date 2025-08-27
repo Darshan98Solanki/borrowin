@@ -5,6 +5,7 @@ import IndiaFlag from '../assets/country/India.svg';
 import OTPmodel from '../assets/newOTPmodel.svg';
 import SignUpForm from '../components/formElements/SignUpForm';
 import OTPVerify from '../components/formElements/OTPVerify';
+import axiosInstance from '../util/axiosInstance';
 
 export default function SignUp() {
     const [mobileNumber, setMobileNumber] = useState('');
@@ -22,16 +23,17 @@ export default function SignUp() {
     ];
 
     const countries = [
-        { code: "+91", flag: IndiaFlag, name: "India" }, // Fixed: removed object wrapper
-        { code: "+1", flag: IndiaFlag, name: "United States" }, // Use USFlag when available
-        { code: "+44", flag: IndiaFlag, name: "United Kingdom" }, // Use UKFlag when available
-        { code: "+61", flag: IndiaFlag, name: "Australia" }, // Use AustraliaFlag when available
+        { code: "+91", flag: IndiaFlag, name: "India" }, 
+        { code: "+1", flag: IndiaFlag, name: "United States" }, 
+        { code: "+44", flag: IndiaFlag, name: "United Kingdom" },
+        { code: "+61", flag: IndiaFlag, name: "Australia" }, 
     ];
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const fullNumber = `${countryCode}${mobileNumber}`;
-        console.log("Submitted Number:", fullNumber);
+        const response = await axiosInstance.post('api/auth/send-otp/', { phone_number: mobileNumber })
+        console.log(response.data);
         setShowOTP(true);
     };
 

@@ -12,16 +12,16 @@ const Documentation = () => {
   ];
 
   return (
-    <div className="mx-10 p-10 text-gray-800">
+    <div className="mx-10 p-10 text-gray-800 mt-10">
       {/* Title */}
-      <h1 className="text-2xl font-semibold text-center mb-10">
+      <h1 className="text-2xl font-semibold text-center mb-20">
         Eligibility & Documentation for Instant Personal Loans Online
       </h1>
 
       {/* Features & Eligibility */}
       <div className="grid md:grid-cols-2 gap-10 mb-10">
         <div>
-          <h2 className="text-xl font-semibold mb-4">Features</h2>
+          <h2 className="text-xl font-semibold mb-8">Features</h2>
           <ul className="list-disc pl-5 space-y-6 ms-2">
             <li>Interest Rates ranging from 12% to 28.5% per annum</li>
             <li>Tenure ranging from 6 months to 60 months</li>
@@ -38,7 +38,7 @@ const Documentation = () => {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">Eligibility Criteria</h2>
+          <h2 className="text-xl font-semibold mb-8">Eligibility Criteria</h2>
           <ul className="list-disc pl-5 space-y-6 ms-2">
             <li>Indian Citizen</li>
             <li>Age to be 21 years and above</li>
@@ -63,14 +63,14 @@ const Documentation = () => {
       {/* Documents Required */}
       <div className="grid md:grid-cols-2 gap-10 mb-10">
         <div>
-          <h2 className="text-xl font-semibold mb-4">Documents Required</h2>
+          <h2 className="text-xl font-semibold mb-8">Documents Required</h2>
           <ul className="list-disc pl-5 space-y-6 ms-2">
             <li>Photograph</li>
             <li>PAN</li>
             <li>Processing fee up to 5.1% + GST</li>
           </ul>
         </div>
-        <div className="md:mt-10">
+        <div className="md:mt-14">
           <ul className="list-disc pl-5 space-y-6 ms-2">
             <li>Address Proof (Permanent & Current Address)</li>
             <li>Income Proof (Bank Statements reflecting Monthly Income)</li>
@@ -86,31 +86,31 @@ const Documentation = () => {
 
       {/* Other Fees & Charges */}
       <div className="mb-10">
-        <h2 className="text-2xl font-semibold mb-6">Other Fee & Charges</h2>
+        <h2 className="text-2xl font-semibold mb-8">Other Fee & Charges</h2>
         <div className="grid md:grid-cols-2 gap-10 text-sm md:text-base">
           {/* Left */}
           <div className="space-y-6 ms-2">
             <div>
-              <h3 className="font-semibold">• Foreclosure charges</h3>
-              <p>Foreclosure charges of 4% of principal outstanding* + GST will be charged in case Foreclosure is opted</p>
+              <h3 className="font-semibold mb-2">• Foreclosure charges</h3>
+              <p className="ms-3">Foreclosure charges of 4% of principal outstanding* + GST will be charged in case Foreclosure is opted</p>
             </div>
 
             <div>
-              <h3 className="font-semibold">• Part–Prepayment Charges</h3>
-              <p>Part Prepayment Charges of 4% of principal prepaid* + GST will be charged in case Part–Prepayment is opted</p>
+              <h3 className="font-semibold mb-2">• Part–Prepayment Charges</h3>
+              <p className="ms-3">Part Prepayment Charges of 4% of principal prepaid* + GST will be charged in case Part–Prepayment is opted</p>
             </div>
 
             <div>
-              <h3 className="font-semibold">• Penal Charges</h3>
-              <ol className="list-decimal pl-5">
+              <h3 className="font-semibold mb-2">• Penal Charges</h3>
+              <ol className="list-decimal pl-5 ms-2">
                 <li>EMI bounce charge (1st day): 4% of principal overdue* or ₹500, whichever is lower</li>
                 <li>Penal charges for 2–180 days: 36% per annum on principal overdue (+ GST if applicable)</li>
               </ol>
             </div>
 
             <div>
-              <h3 className="font-semibold">• Penal Charges</h3>
-              <ol className="list-decimal pl-5">
+              <h3 className="font-semibold mb-2">• Penal Charges</h3>
+              <ol className="list-decimal pl-5 ms-2">
                 <li>EMI bounce charge (1st day): 4% of principal overdue* or ₹500, whichever is lower</li>
                 <li>Penal charges for 2–180 days: 36% per annum on principal overdue (+ GST if applicable)</li>
               </ol>
@@ -120,30 +120,30 @@ const Documentation = () => {
           {/* Right */}
           <div className="space-y-6 ms-2">
             <div>
-              <h3 className="font-semibold">• Retained Processing Fees in case of cool–off</h3>
-              <ol className="list-decimal pl-5">
+              <h3 className="font-semibold mb-2">• Retained Processing Fees in case of cool–off</h3>
+              <ol className="list-decimal pl-5 ms-2">
                 <li>Percentage of one-time fees retained if customer exits during cooling-off</li>
                 <li>Disclosed in KFS (Key Fact Statement)</li>
               </ol>
             </div>
 
             <div>
-              <h3 className="font-semibold">• Stamp Duty</h3>
-              <ol className="list-decimal pl-5">
+              <h3 className="font-semibold mb-2">• Stamp Duty</h3>
+              <ol className="list-decimal pl-5 ms-2">
                 <li>Charged as per actuals at disbursement office/branch</li>
                 <li>Disclosed upfront in KFS</li>
               </ol>
             </div>
 
             <div>
-              <h3 className="font-semibold">• Maintenance & Procurement Cost</h3>
-              <ol className="list-decimal pl-5">
+              <h3 className="font-semibold mb-2">• Maintenance & Procurement Cost</h3>
+              <ol className="list-decimal pl-5 ms-2">
                 <li>May be applied based on disbursement office/branch</li>
                 <li>Disclosed upfront in KFS</li>
               </ol>
             </div>
 
-            <p className="text-sm text-gray-500 mt-2">* round to the nearest rupee</p>
+            <p className="text-sm text-gray-500 mt-2 ms-2">* round to the nearest rupee</p>
           </div>
         </div>
       </div>
