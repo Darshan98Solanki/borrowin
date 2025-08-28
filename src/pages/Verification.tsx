@@ -42,7 +42,7 @@ export default function Vefication() {
     ]);
 
     const [locationStatus, setLocationStatus] = useState<locationPermissionState>('idle');
-    const [coordinates, setCoordinates] = useState<{ lat: number, lng: number } | null>(null);
+    const [_coordinates, setCoordinates] = useState<{ lat: number, lng: number } | null>(null);
     const [loanAmount, setLoanAmount] = useState('');
     const [panNumber, setPanNumber] = useState('');
     const [aadharNumber, setAadharNumber] = useState('');

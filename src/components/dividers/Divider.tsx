@@ -1,13 +1,13 @@
 import LcCheck from '../../assets/icons/LcCheck.svg'
 
-interface CustomizableDividerProps {
-    title?: string;
-    subtitle?: string;
-    buttonText?: string;
-    onButtonClick?: () => void;
-}
+// interface CustomizableDividerProps {
+//     title?: string;
+//     subtitle?: string;
+//     buttonText?: string;
+//     onButtonClick?: () => void;
+// }
 
-export default function CustomizableDivider(props: CustomizableDividerProps) {
+export default function CustomizableDivider(/*props: CustomizableDividerProps*/) {
     return (
         <div className="h-32 bg-[linear-gradient(to_right,rgba(80,186,171,1)_0%,rgba(80,186,171,0.5)_33%,rgba(80,186,171,0.6)_66%,rgba(80,186,171,1)_100%)] flex items-center">
             <div className="container mx-auto px-4 grid grid-cols-3 items-center gap-10">

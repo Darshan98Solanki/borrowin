@@ -10,7 +10,7 @@ type AccessLocationProps = {
     isLoading?: boolean;
 };
 
-export default function AccessLocation({ locationStatus, handleLocationRequest, setCurrentScreen, isLoading }: AccessLocationProps) {
+export default function AccessLocation({ locationStatus, handleLocationRequest, setCurrentScreen, /*isLoading*/ }: AccessLocationProps) {
 
     return <>
 

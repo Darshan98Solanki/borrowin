@@ -31,7 +31,7 @@ export default function SignUp() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const fullNumber = `${countryCode}${mobileNumber}`;
+        const _fullNumber = `${countryCode}${mobileNumber}`;
         const response = await axiosInstance.post('api/auth/send-otp/', { phone_number: mobileNumber })
         console.log(response.data);
         setShowOTP(true);

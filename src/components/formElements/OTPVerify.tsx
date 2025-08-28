@@ -56,7 +56,7 @@ export default function OTPVerify(
     };
 
     useEffect(() => {
-        let interval: number;
+        let interval: ReturnType<typeof setInterval>;
         if (showOTP && countdown > 0) {
             interval = setInterval(() => {
                 setCountdown(prev => prev - 1);
