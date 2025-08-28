@@ -1,5 +1,5 @@
 import Coin from '../../assets/coin.svg';
-import Qs from '../../assets/qs.svg';
+import Qs from '../../assets/Qs.svg';
 
 export default function DividerWithCoin() {
 
