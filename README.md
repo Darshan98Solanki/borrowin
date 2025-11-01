@@ -1,70 +1,50 @@
-# React + TypeScript + Vite
+# Borrowin 🚀  
+A modern, high-performance web application built with React, TypeScript and Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📋 Table of Contents  
+- [Overview](#overview)  
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Getting Started](#getting-started)  
+- [Usage](#usage)  
+- [Project Structure](#project-structure)  
+- [Contributing](#contributing)  
+- [License](#license)  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🧐 Overview  
+Borrowin is a sleek, fast web-app created using React + TypeScript + Vite. It’s designed for modern browsers with hot module replacement (HMR), fast build times, and strong linting via ESLint and TypeScript configurations.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It serves as a foundation for users looking to build scalable Single Page Applications (SPAs) with clean tooling and best practices.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## ✅ Features  
+- Built with React + TypeScript for type safety and maintainability  
+- Powered by Vite for lightning-fast development & build times  
+- Comes pre­configured with ESLint & TypeScript lint rules  
+- Modular project structure (src/public etc) for easy scaling  
+- Clear configuration files (`tsconfig.json`, `vite.config.ts`, etc)  
+- Rapid setup and deployment ready out of the box  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Tech Stack  
+| Layer        | Technologies                                      |
+|--------------|--------------------------------------------------|
+| Frontend     | React, TypeScript, Vite                          |
+| Tooling      | ESLint, TypeScript lint rules, SWC (optional)    |
+| Build Config | `tsconfig.app.json`, `tsconfig.node.json`, `vite.config.ts` |
+| Styles/Assets| Standard HTML/CSS/JS via `public` folder         |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# borrowin
+## 🚀 Getting Started  
+
+### 1. Clone the repo  
+```bash
+git clone https://github.com/Darshan98Solanki/borrowin.git  
+cd borrowin  
